@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+---
+<article class="article">
+  <a href="/" class="back-link">&larr; Back to Home</a>
+  <div class="article__tag">
+    <span class="tag">{{ category }}</span>
+  </div>
+  <h1 class="article__title">{{ title }}</h1>
+  {% if excerpt %}<p class="article__excerpt">{{ excerpt }}</p>{% endif %}
+  <div class="article__meta">
+    {% if author %}<span>By {{ author }}</span>{% endif %}
+    <span>{{ date | readableDate }}</span>
+  </div>
+  {% if image %}<img class="article__hero-img" src="{{ image }}" alt="{{ title }}">{% endif %}
+  <div class="article__body">
+    {{ content | safe }}
+  </div>
+</article>

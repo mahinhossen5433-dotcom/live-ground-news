@@ -1,0 +1,12 @@
+<footer class="site-footer">
+  <div class="container">
+    <img src="/images/logo.png" alt="{{ site.name }}" class="site-footer__logo">
+    <div class="site-footer__tag">{{ site.tagline }}</div>
+    <div class="site-footer__links">
+      {% for cat in site.categories %}
+      <a href="/category/{{ cat.slug }}/">{{ cat.name }}</a>
+      {% endfor %}
+    </div>
+    <div class="site-footer__copy">&copy; {{ currentYear }} {{ site.name }}. All rights reserved.</div>
+  </div>
+</footer>

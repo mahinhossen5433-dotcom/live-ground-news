@@ -1,0 +1,47 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# This shows a preview in the editor and lets editors publish immediately
+# or save drafts. Change publish_mode to "editorial_workflow" later if you
+# want a draft -> review -> publish flow with multiple people.
+publish_mode: simple
+
+media_folder: "src/uploads"
+public_folder: "/uploads"
+
+site_url: https://theliveground.netlify.app
+display_url: https://theliveground.netlify.app
+logo_url: /images/logo.png
+
+collections:
+  - name: "articles"
+    label: "News Articles"
+    label_singular: "Article"
+    folder: "src/articles"
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title}} — {{category}}"
+    sortable_fields: ["date", "title"]
+    view_filters:
+      - label: "Featured only"
+        field: featured
+        pattern: "true"
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/article.njk" }
+      - { label: "Headline", name: "title", widget: "string", hint: "The big bold headline shown on the site." }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Cricket", value: "cricket" }
+          - { label: "Football", value: "football" }
+          - { label: "Live Updates", value: "live-updates" }
+          - { label: "Transfer News", value: "transfer-news" }
+          - { label: "Match Preview", value: "match-preview" }
+      - { label: "Short summary", name: "excerpt", widget: "text", hint: "1-2 sentences shown on cards and under the headline." }
+      - { label: "Cover image", name: "image", widget: "image", hint: "This is the picture shown above/behind the headline." }
+      - { label: "Author", name: "author", widget: "string", default: "Live Ground Staff", required: false }
+      - { label: "Publish date", name: "date", widget: "datetime" }
+      - { label: "Feature on homepage top banner", name: "featured", widget: "boolean", default: false, hint: "Turn this on for the ONE story you want as the big top story." }
+      - { label: "Full article", name: "body", widget: "markdown" }

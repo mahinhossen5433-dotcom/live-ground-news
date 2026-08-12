@@ -1,0 +1,19 @@
+<header class="site-header">
+  <div class="site-header__bar">
+    <a href="/" class="site-header__logo" aria-label="{{ site.name }} home">
+      <img src="/images/logo-transparent.png" alt="{{ site.name }}">
+    </a>
+    <div class="live-badge">
+      <span class="live-dot" aria-hidden="true"></span>
+      <span>Live</span>
+    </div>
+  </div>
+  <nav class="cat-nav" aria-label="Categories">
+    <ul class="cat-nav__list">
+      <li><a class="cat-nav__link{% if not category %} is-active{% endif %}" href="/"><span>Home</span></a></li>
+      {% for cat in site.categories %}
+      <li><a class="cat-nav__link{% if category == cat.slug %} is-active{% endif %}" href="/category/{{ cat.slug }}/"><span>{{ cat.name }}</span></a></li>
+      {% endfor %}
+    </ul>
+  </nav>
+</header>

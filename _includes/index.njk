@@ -1,0 +1,31 @@
+---
+pagination:
+  data: site.categories
+  size: 1
+  alias: cat
+permalink: "/category/{{ cat.slug }}/"
+layout: layouts/base.njk
+eleventyComputed:
+  title: "{{ cat.name }}"
+  category: "{{ cat.slug }}"
+---
+{% from "partials/newscard.njk" import card %}
+{% set catArticles = collections.articles | byCategory(cat.slug) %}
+
+<div class="container">
+  <section class="section">
+    <div class="section__head">
+      <h2 class="section__title">{{ cat.name }}</h2>
+      <div class="section__rule"></div>
+    </div>
+    {% if catArticles.length > 0 %}
+    <div class="grid">
+      {% for article in catArticles %}
+        {{ card(article) }}
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">No {{ cat.name }} stories yet — add one from the admin panel at /admin</div>
+    {% endif %}
+  </section>
+</div>
