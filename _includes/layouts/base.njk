@@ -1,1 +1,21 @@
-layouts/base.njk
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if title %}{{ title }} | {{ site.name }}{% else %}{{ site.name }} — {{ site.tagline }}{% endif %}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <link rel="icon" href="/images/logo.png">
+  <link rel="stylesheet" href="/css/style.css">
+  <meta property="og:title" content="{% if title %}{{ title }}{% else %}{{ site.name }}{% endif %}">
+  <meta property="og:description" content="{{ description or site.description }}">
+  {% if image %}<meta property="og:image" content="{{ image }}">{% endif %}
+</head>
+<body>
+  {% include "partials/header.njk" %}
+  <main>
+    {{ content | safe }}
+  </main>
+  {% include "partials/footer.njk" %}
+</body>
+</html>
