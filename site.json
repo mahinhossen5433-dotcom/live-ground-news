@@ -1,0 +1,13 @@
+{
+  "name": "The Live Ground",
+  "tagline": "Where Sports Come Alive",
+  "url": "https://theliveground.netlify.app",
+  "description": "Live sports news, scores, transfer talk and match previews from The Live Ground.",
+  "categories": [
+    { "name": "Cricket", "slug": "cricket" },
+    { "name": "Football", "slug": "football" },
+    { "name": "Live Updates", "slug": "live-updates" },
+    { "name": "Transfer News", "slug": "transfer-news" },
+    { "name": "Match Preview", "slug": "match-preview" }
+  ]
+}

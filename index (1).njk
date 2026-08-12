@@ -1,0 +1,64 @@
+---
+layout: layouts/base.njk
+title: null
+---
+{% from "partials/newscard.njk" import card %}
+{% set allArticles = collections.articles %}
+{% set featuredList = allArticles | featured %}
+{% set heroArticle = featuredList[0] or allArticles[0] %}
+{% set restArticles = allArticles %}
+
+<div class="container">
+
+  {% if heroArticle %}
+  <section class="hero">
+    <a class="hero__link" href="{{ heroArticle.url }}">
+      <div class="hero__img-wrap">
+        <img class="hero__img" src="{{ heroArticle.data.image }}" alt="{{ heroArticle.data.title }}">
+        <div class="hero__scrim"></div>
+      </div>
+      <div class="hero__content">
+        <span class="tag">{{ heroArticle.data.category }}</span>
+        <h1 class="hero__headline">{{ heroArticle.data.title }}</h1>
+        <div class="hero__meta">{{ heroArticle.data.date | timeAgo }} &middot; {{ heroArticle.data.author or "Staff" }}</div>
+      </div>
+    </a>
+  </section>
+  {% endif %}
+
+  <section class="section">
+    <div class="section__head">
+      <h2 class="section__title">Top Headlines</h2>
+      <div class="section__rule"></div>
+    </div>
+    {% if restArticles.length > 1 %}
+    <div class="grid">
+      {% for article in restArticles %}
+        {% if article.url != heroArticle.url %}
+          {{ card(article) }}
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">No more stories yet — add one from the admin panel at /admin</div>
+    {% endif %}
+  </section>
+
+  {% for cat in site.categories %}
+    {% set catArticles = allArticles | byCategory(cat.slug) %}
+    {% if catArticles.length > 0 %}
+    <section class="section">
+      <div class="section__head">
+        <h2 class="section__title">{{ cat.name }}</h2>
+        <div class="section__rule"></div>
+      </div>
+      <div class="grid">
+        {% for article in catArticles | limit(3) %}
+          {{ card(article) }}
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+  {% endfor %}
+
+</div>

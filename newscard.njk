@@ -1,0 +1,13 @@
+{% macro card(article) %}
+<a class="card" href="{{ article.url }}">
+  <div class="card__img-wrap">
+    <img class="card__img" src="{{ article.data.image }}" alt="{{ article.data.title }}" loading="lazy">
+  </div>
+  <div class="card__body">
+    <span class="card__tag">{{ article.data.category }}</span>
+    <h3 class="card__title">{{ article.data.title }}</h3>
+    {% if article.data.excerpt %}<p class="card__excerpt">{{ article.data.excerpt }}</p>{% endif %}
+    <div class="card__meta">{{ article.data.date | timeAgo }} &middot; {{ article.data.author or "Staff" }}</div>
+  </div>
+</a>
+{% endmacro %}
